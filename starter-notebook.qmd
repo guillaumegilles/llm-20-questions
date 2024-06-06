@@ -2,6 +2,11 @@
 title: Kaggle Starter Notebook
 ---
 
+- https://www.kaggle.com/code/guillaumegilles/run-debug-llm-20-questions-in-a-notebook/edit
+- https://github.com/Kaggle/kaggle-environments/blob/master/README.md
+
+
+
 https://www.kaggle.com/code/ryanholbrook/llm-20-questions-starter-notebook
 
 This notebook illustrates the agent creation process for the **LLM 20 Questions**.
@@ -236,6 +241,9 @@ class GemmaAnswererAgent(GemmaAgent):
 ```
 
 ## Agent Creation
+
+Agent is a function which given an observation, `obs` generates an action. First,
+we define `get_agent`
 
 **IMPORTANT:** Define agent as a global so you only have to load the agent you
 need. Loading both will likely lead to OOM.

@@ -105,6 +105,20 @@ word after 20 rounds, the game results in a tie. The goal is for each team's
 questioner to guess the target word in as few rounds as possible based on the
 information provided by the answering agent.
 
+`country`, `city`, `landmark`
+
+There will be a few changes to keywords.py (this is the list of possible words to guess for the game).
+
+Categories will be simplified into `person`, `place`, or `thing`.
+
+Change will happen next week (first week of June)
+
+Half way through the competition more words will be added
+
+As stated in the rules, after the FINAL submission deadline, the words will be swapped for a set that is NOT accessible by your agents. This word set will have the same 3 categories
+
+IMPORTANT: Do not rely on knowing the full list of possible words ahead of time!
+
 ## Timeouts, Limits and Penalties.
 
 - Questions are limited to 2000 characters
