@@ -16,13 +16,12 @@ from the notebook viewer, click the *Output* tab then find and download `submiss
 Click **Submit Agent** at the upper-left of the competition homepage to upload
 your file and make your submission.
 
-## Gemma 7B-it-quant V2
+## Setup
 
-A PyTorch implementation of Gemma 7B instruction tuned model. It is a 7B 
-`int8` quantized parameter base model that has been instruction-tuned so it
-can respond to prompts in a conversation manner.
+**IMPORTANT:** Set up your system path like this to make your code work both in
+notebooks and in the simulations environment.
 
-```{bash}
+```{python}
 %%bash
 cd /kaggle/working
 pip install -q -U -t /kaggle/working/submission/lib immutabledict sentencepiece
@@ -31,14 +30,11 @@ mkdir /kaggle/working/submission/lib/gemma/
 mv /kaggle/working/gemma_pytorch/gemma/* /kaggle/working/submission/lib/gemma/
 ```
 
-## Setup
+## Gemma 7B-it-quant V2
 
-**IMPORTANT:** Set up your system path like this to make your code work both in
-notebooks and in the simulations environment.
-
-```{python}
-%%writefile submission/main.py
-```
+A PyTorch implementation of Gemma 7B instruction tuned model. It is a 7B `int8`
+quantized parameter base model that has been instruction-tuned so it can respond
+to prompts in a conversation manner.
 
 ```{python}
 import os
@@ -294,10 +290,13 @@ def agent_fn(obs, cfg):
         return response
 ```
 
+## Submission
+https://linuxhandbook.com/pigz/
 ```{bash}
 !apt install pigz pv > /dev/null
 ```
 
+Using pigz, creating a `submission.tar.gz` inside the directory `kaggle/working/submission`
 ```{bash}
 !tar --use-compress-program='pigz --fast --recursive | pv' -cf submission.tar.gz -C /kaggle/working/submission . -C /kaggle/input/ gemma/pytorch/7b-it-quant/2
 ```

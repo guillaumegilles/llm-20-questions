@@ -1,0 +1,281 @@
+---
+title: "Untitled"
+format: html
+---
+
+## Environment Tips: Run LLM 20 Questions in a Notebook
+
+To test and debug your agent in LLM 20 Questions or any other competition using
+Kaggle environments, it helps to be able to run the environment in a notebook.
+Here are some tips and explanations that may be helpful.
+
+## Game environment configuration
+
+Kaggle environments are created with the `make()` function with the environment
+name, `llm_20_questions` and some optional defaults, like configuration and info.
+If you want to run a game just like the competition, just use the defaults.
+
+```{python}
+help(make)
+```
+
+Help on function make in module  `kaggle_environments.core`:
+
+```python
+# Creates an instance of an Environment.
+make(environment,
+     configuration=None,
+     info=None,
+     steps=None,
+     logs=None,
+     debug=False,
+     state=None) 
+
+Args:
+    environment (str|Environment):
+    configuration (dict, optional):
+    info (dict, optional):
+    steps (list, optional):
+    debug (bool=False, optional): Render print() statments to stdout
+    state (optional):
+
+Returns:
+    Environment: Instance of a specific environment.
+```
+
+```{python}
+# Additional documentation (especially interfaces) can be found on all public functions:
+from kaggle_environments import make
+help(make)
+env = make("tictactoe")
+dir(env)
+#help(env.reset)
+```
+
+```{python}
+from kaggle_environments import make
+
+env = make("llm_20_questions")
+```
+
+---
+---
+
+Create a Simple Agent
+
+If you just want to experiment, an agent can be as simple as a Python function. Your agent is a function with two inputs, obs and cfg, and it provides a text response as output.
+
+The agent needs to be able to handle three turnTypes ("ask", "guess" and "answer"). The response for answer has to be "yes" or "no".
+
+Here are four simple agents:
+
+```{python}
+def simple_agent1(obs, cfg):
+    # if agent is guesser and turnType is "ask"
+    if obs.turnType == "ask": response = "Is it a duck?"
+    elif obs.turnType == "guess": response = "duck"
+    elif obs.turnType == "answer": response = "no"
+    return response
+
+def simple_agent2(obs, cfg):
+    # if agent is guesser and turnType is "ask"
+    if obs.turnType == "ask": response = "Is it a bird?"
+    elif obs.turnType == "guess": response = "bird"
+    elif obs.turnType == "answer": response = "no"
+    return response
+
+def simple_agent3(obs, cfg):
+    # if agent is guesser and turnType is "ask"
+    if obs.turnType == "ask": response = "Is it a pig?"
+    elif obs.turnType == "guess": response = "pig"
+    elif obs.turnType == "answer": response = "no"
+    return response
+
+def simple_agent4(obs, cfg):
+    # if agent is guesser and turnType is "ask"
+    if obs.turnType == "ask": response = "Is it a cow?"
+    elif obs.turnType == "guess": response = "cow"
+    elif obs.turnType == "answer": response = "no"
+    return response
+```
+
+## Running LLM 20 Questions (default)
+
+You can then create and run the game in this environment. When you run the game, you must submit a list of four agents:
+
+    "Agent1" (guesser for Team 1),
+    "Agent2" (answerer for Team 1),
+    "Agent3" (guesser for Team 2),
+    "Agent4" (answerer for Team 2).
+
+In the competition, you are randomly paired with a teammate to either be the guesser or the answerer.
+
+(When I first started this competition, I mistakenly thought your agent plays both the guesser and answerer role for the team. But you are paired with someone else in the competition. You do well or poorly depending on your ability to cooperate with a random partner.)
+
+```{python}
+%%time
+game_output = env.run(agents=[simple_agent1, simple_agent2, simple_agent3, simple_agent4])
+```
+
+The game in this example completes quickly since the simple agents respond immediately. A real game with large LLM's as agents could take a minute for each step, so the total game could take an hour!
+
+You can look at the data from each step of the game in game_output.
+
+If want to watch the game visually, you can render it.
+
+```{python}
+env.render(mode="ipython", width=400, height=400)
+```
+
+## Create an Agent that Could be Submitted¶
+
+To submit an agent to the competition, you need to write the Python code for the agent in a file titled main.py and put it along with any supporting files in submission.tar.gz
+
+A simple example is below. Of course, in the actual competition, you'll probably want to use a real LLM like in the official starter notebook (https://www.kaggle.com/code/ryanholbrook/llm-20-questions-starter-notebook). Running LLM agents in a notebook will take more time and memory, so if you're testing your LLM agent as player 1, you might want to put a simple agent as player 2.
+
+    Create a directory /kaggle/working/submission with a subdirectory lib where you would put any supporting files
+
+
+```{python}
+import os
+submission_directory = "/kaggle/working/submission"
+submission_subdirectory = "lib"
+# Create the main directory if it doesn't exist
+if not os.path.exists(submission_directory):
+    os.mkdir(submission_directory)
+    subdirectory_path = os.path.join(submission_directory, submission_subdirectory)
+    os.mkdir(subdirectory_path)
+```
+
+```{python}
+# create an example file to save in the lib directory
+import csv
+with open(os.path.join(subdirectory_path, "example.csv"),mode='w') as file:
+    writer = csv.writer(file)
+    writer.writerow(["cow", "horse"])
+```
+
+- Write the main.py Python code for your agent
+- The environment will use the last function in main.py for your agent, in this case agent_fun()
+
+```{python}
+%%writefile /kaggle/working/submission/main.py
+
+import os
+import sys
+import csv
+import random
+
+
+
+# If you put other files (e.g. model weights) in your submission/lib directory, you need to set the path
+KAGGLE_COMPETITION_PATH = "/kaggle_simulations/agent/" # competition path
+if os.path.exists(KAGGLE_COMPETITION_PATH):  # if running in the competition
+    subdirectory_path = os.path.join(KAGGLE_COMPETITION_PATH, "lib")
+else: # if running in notebook
+    subdirectory_path = os.path.join("/kaggle/working/submission/", "lib")
+sys.path.insert(0, subdirectory_path)
+
+
+# Loading our example file
+with open(os.path.join(subdirectory_path,"example.csv"), mode='r') as file:
+    reader = csv.reader(file)
+    guess_list = list(reader)
+    guess_list = guess_list[0]
+
+# Setting a random "animal" from example file as a global variable
+animal = random.choice(guess_list)
+    
+# Last function in the main.py will be the agent function
+def agent_fn(obs, cfg):
+    
+    # if agent is guesser and turnType is "ask"
+    if obs.turnType == "ask":
+        response = f'Does it look like a {animal}?'
+    # if agent is guesser and turnType is "guess"
+    elif obs.turnType == "guess":
+        if obs.answers[-1]=="yes":
+            response = animal
+        else:
+            response = "penguin"
+    # if agent is the answerer
+    elif obs.turnType == "answer":
+        if obs.keyword in obs.questions[-1]:
+            response = "yes"
+        else:
+            response = "no"
+
+    return response
+```
+
+This main.py file with the agent is ready to submit along with the /lib/example.csv supporting file.
+
+```{bash}
+!apt install pigz pv > /dev/null
+!tar --use-compress-program='pigz --fast --recursive | pv' -cf submission.tar.gz -C /kaggle/working/submission .
+```
+
+You can run the agent in main.py from this Jupyter notebook as both players on Team 1, and we'll use simple_agent3 and simple_agent4 for Team 2.
+
+```{python}
+game_output = env.run(agents=["/kaggle/working/submission/main.py", "/kaggle/working/submission/main.py", simple_agent3, simple_agent4])
+env.render(mode="ipython", width=400, height=400)
+```
+
+## Debugging Tips
+
+When you're designing and debugging, you normally want to change some of the optional arguments in creating the environment. These include:
+
+env = make(environment, configuration=None, info=None, steps=None, logs=None, debug=False, state=None)
+
+You can look at the specifications in env.specification to learn about how configuration and other objects defined in the environment. It has explanations and shows the default values.
+
+When working on new agents, I'd suggest changing the configuration to run a shorter episode with only a few steps and setting debug=True so you can see any verbose output printed by your agents.
+
+Here is a new environment that is better for debugging.
+
+
+```{python}
+# For debugging, play game with only two rounds
+debug_config = {'episodeSteps': 7,     # initial step plus 3 steps per round (ask/answer/guess)
+                'actTimeout': 5,       # agent time per round in seconds; default is 60
+                'runTimeout': 60,      # max time for the episode in seconds; default is 1200
+                'agentTimeout': 3600}  # obsolete field; default is 3600
+
+env = make("llm_20_questions", configuration=debug_config, debug=True)
+```
+
+And we can have our agent print some information for debugging. I added print
+statements to simple agent 1 to show what information is available in `obs`
+
+```{python}
+def simple_verbose_agent1(obs, cfg):
+    
+    # if agent is guesser and turnType is "ask"
+    if obs.turnType == "ask":
+        response = "Is it a duck?"
+    # if agent is guesser and turnType is "guess"
+    elif obs.turnType == "guess":
+        response = "duck"
+    # if agent is the answerer
+    elif obs.turnType == "answer":
+        response = "no"
+    
+    # Print debugging information
+    print("====================")
+    print(f"step = {obs.step}")
+    print(f"turnType = {obs.turnType}")
+    print("obs =")
+    print(obs)
+    print(" ")
+    print(f'response = "{response}"')
+
+    return response
+```
+
+Putting this simple_verbose_agent1 as both players on Team 1 allows us to observe
+each of the three turn types (ask/guess/answer).
+
+```{python}
+game_output = env.run(agents=[simple_verbose_agent1,simple_verbose_agent1, simple_agent3, "/kaggle/working/submission/main.py"])
+```
