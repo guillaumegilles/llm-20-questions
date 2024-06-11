@@ -1,5 +1,7 @@
 ---
 title: Kaggle Starter Notebook
+format: html
+jupyter: python3
 ---
 
 - https://www.kaggle.com/code/guillaumegilles/run-debug-llm-20-questions-in-a-notebook/edit
@@ -20,6 +22,8 @@ your file and make your submission.
 
 **IMPORTANT:** Set up your system path like this to make your code work both in
 notebooks and in the simulations environment.
+
+Let’s start by installing piece of code set up the directory of the kaggle notebook.
 
 ```{python}
 %%bash
