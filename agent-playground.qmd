@@ -1,19 +1,16 @@
 ---
 title: "Untitled"
 format: html
+jupyter: python3
 ---
 
 ## Environment Tips: Run LLM 20 Questions in a Notebook
 
-To test and debug your agent in LLM 20 Questions or any other competition using
-Kaggle environments, it helps to be able to run the environment in a notebook.
-Here are some tips and explanations that may be helpful.
+To test and debug your agent in LLM 20 Questions or any other competition using Kaggle environments, it helps to be able to run the environment in a notebook. Here are some tips and explanations that may be helpful.
 
 ## Game environment configuration
 
-Kaggle environments are created with the `make()` function with the environment
-name, `llm_20_questions` and some optional defaults, like configuration and info.
-If you want to run a game just like the competition, just use the defaults.
+Kaggle environments are created with the `make()` function with the environment name, `llm_20_questions` and some optional defaults, like configuration and info. If you want to run a game just like the competition, just use the defaults.
 
 ```{python}
 help(make)
