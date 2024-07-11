@@ -1,5 +1,0 @@
----
-title: Walkthrough Kaggle Starter Notebook
-format: html
-jupyter: python3
----
