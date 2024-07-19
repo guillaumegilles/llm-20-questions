@@ -12,6 +12,10 @@ Each team will consist of one guesser LLM, responsible for asking questions and 
 
 This competition will evaluate LLMs on key skills like deductive reasoning, efficient information gathering through targeted questioning, and collaboration between paired agents. It also presents a constrained setting requiring creativity and strategy with a limited number of guesses.Success will demonstrate LLMs' capacity for not just answering questions, but also asking insightful questions, performing logical inference, and quickly narrowing down possibilities.
 
+## Setting up the environment
+
+1.
+
 ## Evaluation
 
 Each day your team is able to submit up to 5 agents (bots) to the competition. Each submission will play episodes (games) against other bots on the leaderboard that have a similar skill rating. Over time, skill ratings will go up with wins, down with losses, or evened out with ties.
@@ -67,7 +71,7 @@ As stated in the rules, after the FINAL submission deadline, the words will be s
 
 IMPORTANT: Do not rely on knowing the full list of possible words ahead of time!
 
-## Timeouts, Limits and Penalties.
+## Timeouts, Limits and Penalties
 
 - Questions are limited to 2000 characters
 - Guesses are limited to 100 characters

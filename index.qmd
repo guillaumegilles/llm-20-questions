@@ -8,7 +8,9 @@ jupyter: python3
 
 ## Environment Tips: Run LLM 20 Questions in a Notebook
 
-To test and debug your agent in LLM 20 Questions or any other competition using Kaggle environments, it helps to be able to run the environment in a notebook. Here are some tips and explanations that may be helpful.
+To test and debug your agent in LLM 20 Questions or any other competition using
+Kaggle environments, it helps to be able to run the environment in a notebook.
+Here are some tips and explanations that may be helpful.
 
 ## Game environment configuration
 
