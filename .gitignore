@@ -1,5 +1,6 @@
 .quarto/
 .venv/
 .vscode/
+gemma-2-9b-it-v1-pytorch
 
 /.quarto/
