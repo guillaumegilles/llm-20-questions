@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-08-27">
 
 <title>Kaggle LLM 20 Questions</title>
 <style>
@@ -20,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -29,10 +50,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script async="" src="https://hypothes.is/embed.js"></script>
 <script>
   window.document.addEventListener("DOMContentLoaded", function (_event) {
@@ -45,7 +68,15 @@ ul.task-list li input[type="checkbox"] {
 
 
 <meta name="citation_title" content="Kaggle LLM 20 Questions">
+<meta name="citation_abstract" content="The characteristic theme of the works of Stone is the bridge between culture and society.
+">
+<meta name="citation_author" content="Guillaume Gilles">
+<meta name="citation_publication_date" content="2024-08-27">
+<meta name="citation_cover_date" content="2024-08-27">
+<meta name="citation_year" content="2024">
+<meta name="citation_online_date" content="2024-08-27">
 <meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Literate programming;,citation_author=Donald E. Knuth;,citation_publication_date=1984-05;,citation_cover_date=1984-05;,citation_year=1984;,citation_fulltext_html_url=https://doi.org/10.1093/comjnl/27.2.97;,citation_issue=2;,citation_doi=10.1093/comjnl/27.2.97;,citation_issn=0010-4620;,citation_volume=27;,citation_journal_title=Comput. J.;,citation_publisher=Oxford University Press, Inc.;">
 </head>
 
 <body>
@@ -62,7 +93,19 @@ ul.task-list li input[type="checkbox"] {
         
         <div class="quarto-title-meta">
 
+                <div>
+            <div class="quarto-title-meta-heading">Author</div>
+            <div class="quarto-title-meta-contents">
+                        <p>Guillaume Gilles <a href="mailto:guillaumegilles@me.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0000-7940-9359" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+                      </div>
+          </div>
                 
+                <div>
+            <div class="quarto-title-meta-heading">Published</div>
+            <div class="quarto-title-meta-contents">
+              <p class="date">August 27, 2024</p>
+            </div>
+          </div>
           
                 
               </div>
@@ -71,6 +114,12 @@ ul.task-list li input[type="checkbox"] {
       </div>
     </div>
 
+    <div>
+      <div class="abstract">
+        <div class="block-title">Abstract</div>
+        <p>The characteristic theme of the works of Stone is the bridge between culture and society.</p>
+      </div>
+    </div>
 
 
     <div class="quarto-other-links-text-target">
@@ -81,12 +130,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#make-and-configure-game-environment" id="toc-make-and-configure-game-environment" class="nav-link active" data-scroll-target="#make-and-configure-game-environment">Make and Configure Game Environment</a>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">Section</a></li>
+  <li><a href="#make-and-configure-game-environment" id="toc-make-and-configure-game-environment" class="nav-link" data-scroll-target="#make-and-configure-game-environment">Make and Configure Game Environment</a>
   <ul class="collapse">
   <li><a href="#creating-dummy-agents" id="toc-creating-dummy-agents" class="nav-link" data-scroll-target="#creating-dummy-agents">Creating Dummy Agents</a></li>
   <li><a href="#running-a-dummy-game" id="toc-running-a-dummy-game" class="nav-link" data-scroll-target="#running-a-dummy-game">Running a Dummy Game</a></li>
-  </ul></li>
   <li><a href="#creating-an-ai-agent" id="toc-creating-an-ai-agent" class="nav-link" data-scroll-target="#creating-an-ai-agent">Creating an AI Agent</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="index-preview.html"><i class="bi bi-journal-code"></i>Article Notebook</a></li></ul></div></nav>
 </div>
@@ -99,26 +150,30 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-<section id="make-and-configure-game-environment" class="level2">
-<h2 class="anchored" data-anchor-id="make-and-configure-game-environment">Make and Configure Game Environment</h2>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">Section</h2>
+<p>This is a simple placeholder for the manuscript’s main document <span class="citation" data-cites="knuth84">Knuth (<a href="#ref-knuth84" role="doc-biblioref">1984</a>)</span>.</p>
+</section>
+<section id="make-and-configure-game-environment" class="level1">
+<h1>Make and Configure Game Environment</h1>
 <p>Kaggle environments are created with the <code>make()</code> function with the environment name (“llm_20_questions”) and some optional defaults, like configuration and info. If you want to run a game just like the competition, you can just use the defaults.</p>
-<div id="90251274" class="cell" data-execution_count="1">
+<div id="23f2706e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-stdout">
 <pre><code>termcolor not installed, skipping dependency
 No pygame installed, ignoring import</code></pre>
 </div>
-<a class="quarto-notebook-link" id="nblink-1" href="index-preview.html#90251274">Source: Article Notebook</a></div>
+<a class="quarto-notebook-link" id="nblink-1" href="index-preview.html#23f2706e">Source: Article Notebook</a></div>
 <p>When you initialize the environment, it sets the keyword to be guessed. You can inspect or change this in <code>kaggle_environments.envs.llm_20_questions.llm_20_questions.keyword</code></p>
-<div id="7954440f" class="cell" data-execution_count="2">
+<div id="f4b7737b" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>The keyword for this session is: 
-zurich switzerland
+Wine Decanter
  
 Some keywords have a list of alternative guesses (alts) that are also accepted.
 For this session, the list of alts is:
-['zurich']</code></pre>
+['Decanter']</code></pre>
 </div>
-<a class="quarto-notebook-link" id="nblink-2" href="index-preview.html#7954440f">Source: Article Notebook</a></div>
+<a class="quarto-notebook-link" id="nblink-2" href="index-preview.html#f4b7737b">Source: Article Notebook</a></div>
 <section id="creating-dummy-agents" class="level3">
 <h3 class="anchored" data-anchor-id="creating-dummy-agents">Creating Dummy Agents</h3>
 <p>If you just want to experiment, an agent can be as simple as a Python function. Your agent is a function with two inputs, <code>obs</code> and <code>cfg</code>, and it provides a text response as output.</p>
@@ -136,16 +191,16 @@ For this session, the list of alts is:
 </ul>
 <p>In the competition, you are randomly paired with a teammate to either be the guesser or the answerer.</p>
 <p>(When I first started this competition, I mistakenly thought your agent plays both the guesser and answerer role for the team. But you are paired with someone else in the competition. You do well or poorly depending on your ability to cooperate with a random partner.)</p>
-<div id="4b0c257e" class="cell" data-execution_count="4">
+<div id="afe6bf24" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
-<pre><code>CPU times: user 160 ms, sys: 0 ns, total: 160 ms
-Wall time: 160 ms</code></pre>
+<pre><code>CPU times: user 168 ms, sys: 0 ns, total: 168 ms
+Wall time: 168 ms</code></pre>
 </div>
-<a class="quarto-notebook-link" id="nblink-3" href="index-preview.html#4b0c257e">Source: Article Notebook</a></div>
+<a class="quarto-notebook-link" id="nblink-3" href="index-preview.html#afe6bf24">Source: Article Notebook</a></div>
 <p>The game in this example completes quickly since the simple agents respond immediately. A real game with large LLM’s as agents could take a minute for each step, so the total game could take an hour!</p>
 <p>You can look at the data from each step of the game in game_output.</p>
 <p>If want to watch the game visually, you can render it.</p>
-<div id="bcd61d36" class="cell" data-execution_count="5">
+<div id="23427e63" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <iframe srcdoc="<!--
   Copyright 2020 Kaggle Inc
@@ -208,7 +263,7 @@ window.kaggle = {
   &quot;step&quot;: 0,
   &quot;controls&quot;: true,
   &quot;environment&quot;: {
-    &quot;id&quot;: &quot;ab448344-6bb9-11ef-8118-24418c72b537&quot;,
+    &quot;id&quot;: &quot;7baa3414-713e-11ef-aa32-24418c72b537&quot;,
     &quot;name&quot;: &quot;llm_20_questions&quot;,
     &quot;title&quot;: &quot;20 Questions&quot;,
     &quot;description&quot;: &quot;20 Questions played between two LLM agents&quot;,
@@ -465,8 +520,8 @@ window.kaggle = {
             &quot;answers&quot;: [],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -501,8 +556,8 @@ window.kaggle = {
             &quot;answers&quot;: [],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -544,8 +599,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -584,8 +639,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -631,8 +686,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -675,8 +730,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -724,8 +779,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -770,8 +825,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -821,8 +876,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -869,8 +924,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -922,8 +977,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -972,8 +1027,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -1027,8 +1082,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -1079,8 +1134,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -1136,8 +1191,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -1190,8 +1245,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -1249,8 +1304,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -1305,8 +1360,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -1366,8 +1421,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -1424,8 +1479,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -1487,8 +1542,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -1547,8 +1602,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -1612,8 +1667,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -1674,8 +1729,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -1741,8 +1796,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -1805,8 +1860,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -1874,8 +1929,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -1940,8 +1995,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -2011,8 +2066,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -2079,8 +2134,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -2152,8 +2207,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -2222,8 +2277,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -2297,8 +2352,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -2369,8 +2424,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -2446,8 +2501,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -2520,8 +2575,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -2599,8 +2654,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -2675,8 +2730,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -2756,8 +2811,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -2834,8 +2889,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -2917,8 +2972,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -2997,8 +3052,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -3082,8 +3137,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -3164,8 +3219,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -3251,8 +3306,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -3335,8 +3390,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -3424,8 +3479,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -3510,8 +3565,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -3601,8 +3656,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -3689,8 +3744,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -3782,8 +3837,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -3872,8 +3927,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -3967,8 +4022,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -4059,8 +4114,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -4156,8 +4211,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -4250,8 +4305,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -4349,8 +4404,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -4445,8 +4500,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -4546,8 +4601,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -4644,8 +4699,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -4747,8 +4802,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -4847,8 +4902,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -4952,8 +5007,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -5054,8 +5109,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -5161,8 +5216,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -5265,8 +5320,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -5374,8 +5429,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -5480,8 +5535,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -5591,8 +5646,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -5699,8 +5754,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -5812,8 +5867,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -5922,8 +5977,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -6037,8 +6092,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -6149,8 +6204,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -6266,8 +6321,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -6380,8 +6435,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -6499,8 +6554,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -6615,8 +6670,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -6736,8 +6791,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -6854,8 +6909,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -6977,8 +7032,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -7097,8 +7152,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -7222,8 +7277,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -7344,8 +7399,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -7471,8 +7526,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -7595,8 +7650,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -7724,8 +7779,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -7850,8 +7905,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -7981,8 +8036,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -8109,8 +8164,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -8242,8 +8297,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -8372,8 +8427,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -8507,8 +8562,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -8639,8 +8694,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -8776,8 +8831,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -8910,8 +8965,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -9049,8 +9104,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -9185,8 +9240,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -9326,8 +9381,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -9464,8 +9519,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -9607,8 +9662,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -9747,8 +9802,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -9892,8 +9947,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -10034,8 +10089,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -10181,8 +10236,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -10325,8 +10380,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -10474,8 +10529,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -10620,8 +10675,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -10771,8 +10826,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -10919,8 +10974,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -11072,8 +11127,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -11222,8 +11277,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -11377,8 +11432,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -11529,8 +11584,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -11686,8 +11741,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         },
@@ -11840,8 +11895,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;ACTIVE&quot;
         }
@@ -11999,8 +12054,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         },
@@ -12155,8 +12210,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;INACTIVE&quot;
         }
@@ -12237,8 +12292,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;guesser&quot;,
             &quot;turnType&quot;: &quot;guess&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;DONE&quot;
         },
@@ -12316,8 +12371,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;DONE&quot;
         },
@@ -12395,8 +12450,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;guesser&quot;,
             &quot;turnType&quot;: &quot;guess&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;DONE&quot;
         },
@@ -12474,8 +12529,8 @@ window.kaggle = {
             ],
             &quot;role&quot;: &quot;answerer&quot;,
             &quot;turnType&quot;: &quot;answer&quot;,
-            &quot;keyword&quot;: &quot;zurich switzerland&quot;,
-            &quot;category&quot;: &quot;place&quot;
+            &quot;keyword&quot;: &quot;Wine Decanter&quot;,
+            &quot;category&quot;: &quot;things&quot;
           },
           &quot;status&quot;: &quot;DONE&quot;
         }
@@ -12852,7 +12907,91 @@ window.kaggle = {
     [
       {},
       {
+        &quot;duration&quot;: 5e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {},
+      {
         &quot;duration&quot;: 3e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      }
+    ],
+    [
+      {
+        &quot;duration&quot;: 3e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {},
+      {
+        &quot;duration&quot;: 2e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {}
+    ],
+    [
+      {
+        &quot;duration&quot;: 3e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {},
+      {
+        &quot;duration&quot;: 2e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {}
+    ],
+    [
+      {},
+      {
+        &quot;duration&quot;: 3e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {},
+      {
+        &quot;duration&quot;: 2e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      }
+    ],
+    [
+      {
+        &quot;duration&quot;: 3e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {},
+      {
+        &quot;duration&quot;: 2e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {}
+    ],
+    [
+      {
+        &quot;duration&quot;: 3e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {},
+      {
+        &quot;duration&quot;: 2e-06,
+        &quot;stdout&quot;: &quot;&quot;,
+        &quot;stderr&quot;: &quot;&quot;
+      },
+      {}
+    ],
+    [
+      {},
+      {
+        &quot;duration&quot;: 4e-06,
         &quot;stdout&quot;: &quot;&quot;,
         &quot;stderr&quot;: &quot;&quot;
       },
@@ -12997,7 +13136,7 @@ window.kaggle = {
       },
       {},
       {
-        &quot;duration&quot;: 2e-06,
+        &quot;duration&quot;: 1.5e-05,
         &quot;stdout&quot;: &quot;&quot;,
         &quot;stderr&quot;: &quot;&quot;
       },
@@ -13117,13 +13256,13 @@ window.kaggle = {
     ],
     [
       {
-        &quot;duration&quot;: 3e-06,
+        &quot;duration&quot;: 3.2e-05,
         &quot;stdout&quot;: &quot;&quot;,
         &quot;stderr&quot;: &quot;&quot;
       },
       {},
       {
-        &quot;duration&quot;: 2e-06,
+        &quot;duration&quot;: 3e-06,
         &quot;stdout&quot;: &quot;&quot;,
         &quot;stderr&quot;: &quot;&quot;
       },
@@ -13131,97 +13270,13 @@ window.kaggle = {
     ],
     [
       {
-        &quot;duration&quot;: 3e-06,
+        &quot;duration&quot;: 4e-06,
         &quot;stdout&quot;: &quot;&quot;,
         &quot;stderr&quot;: &quot;&quot;
       },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {}
-    ],
-    [
       {},
       {
         &quot;duration&quot;: 3e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      }
-    ],
-    [
-      {
-        &quot;duration&quot;: 3e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {}
-    ],
-    [
-      {
-        &quot;duration&quot;: 3e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {}
-    ],
-    [
-      {},
-      {
-        &quot;duration&quot;: 3e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      }
-    ],
-    [
-      {
-        &quot;duration&quot;: 3e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {}
-    ],
-    [
-      {
-        &quot;duration&quot;: 3e-06,
-        &quot;stdout&quot;: &quot;&quot;,
-        &quot;stderr&quot;: &quot;&quot;
-      },
-      {},
-      {
-        &quot;duration&quot;: 2e-06,
         &quot;stdout&quot;: &quot;&quot;,
         &quot;stderr&quot;: &quot;&quot;
       },
@@ -14171,8 +14226,7 @@ const wrapText = function(ctx, inputText, x, y, maxWidth, lineHeight) {
 </html>
 " width="600" height="400" frameborder="0"></iframe> 
 </div>
-<a class="quarto-notebook-link" id="nblink-4" href="index-preview.html#bcd61d36">Source: Article Notebook</a></div>
-</section>
+<a class="quarto-notebook-link" id="nblink-4" href="index-preview.html#23427e63">Source: Article Notebook</a></div>
 </section>
 <section id="creating-an-ai-agent" class="level2">
 <h2 class="anchored" data-anchor-id="creating-an-ai-agent">Creating an AI Agent</h2>
@@ -14180,6 +14234,15 @@ const wrapText = function(ctx, inputText, x, y, maxWidth, lineHeight) {
 <p>A simple example is below. Of course, in the actual competition, you’ll probably want to use a real LLM like in the official starter notebook. Running LLM agents in a notebook will take more time and memory, so if you’re testing your LLM agent as player 1, you might want to put a simple agent as player 2.</p>
 <pre><code>Create a directory /kaggle/working/submission/lib where you would put any
 supporting files</code></pre>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-knuth84" class="csl-entry" role="listitem">
+Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
+</div>
+</div>
 </section>
 
 </main>
@@ -14204,6 +14267,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

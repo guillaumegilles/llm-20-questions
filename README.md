@@ -1,4 +1,4 @@
-![images/preview.png](images/preview.jpg)
+![images/preview.png](images/kit-robot-engaged-in-machine-learning-with-book-and-chart.gif)
 
 ## TODOs
 

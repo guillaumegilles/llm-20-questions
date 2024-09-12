@@ -2,11 +2,20 @@ project:
   type: manuscript
   output-dir: docs
 
+manuscript:
+  article: index.qmd
+
 format:
   html:
-    toc: true
+    # Comments
     comments:
       hypothesis: true
-  docx: default
-  jats: default
-  agu-pdf: default
+
+    theme:
+      light: sass/light.scss
+      dark: sass/dark.scss
+
+    email-obfuscation: javascript
+
+execute:
+  freeze: true

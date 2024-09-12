@@ -1,11 +1,23 @@
 ---
-title: "Kaggle LLM 20 Questions"
+title: Kaggle LLM 20 Questions
+date: 2024-08-27
+authors:
+  - name: Guillaume Gilles
+    orcid: 0009-0000-7940-9359
+    email: guillaumegilles@me.com
+    affiliation:
+abstract: |
+  The characteristic theme of the works of Stone is the bridge between culture and society.
+bibliography: references.bib
 #image: "images/preview.png"
-format: html
 jupyter: python3
 ---
 
-## Make and Configure Game Environment
+
+## Section
+This is a simple placeholder for the manuscript's main document @knuth84.
+
+# Make and Configure Game Environment
 
 Kaggle environments are created with the `make()` function with the environment name ("llm_20_questions") and some optional defaults, like
 configuration and info. If you want to run a game just like the competition, you can just use the defaults.
@@ -389,3 +401,8 @@ import torch
 #     else:
 #         return response
 ```
+
+# References
+
+::: {#refs}
+:::
