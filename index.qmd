@@ -9,7 +9,7 @@ authors:
 abstract: |
   The characteristic theme of the works of Stone is the bridge between culture and society.
 bibliography: references.bib
-#image: "images/preview.png"
+image: images/kit-robot-engaged-in-machine-learning-with-book-and-chart.png
 jupyter: python3
 ---
 
