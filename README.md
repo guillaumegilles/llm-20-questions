@@ -2,10 +2,12 @@
 
 ## TODOs
 
+1. [ ] [Starter Code for Llama 8B LLM - [LB 0.750+]](https://www.kaggle.com/code/cdeotte/starter-code-for-llama-8b-llm-lb-0-750)
 2. [ ] https://www.kaggle.com/competitions/llm-20-questions/discussion/513394
 3. [ ] https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Guess_the_word.ipynb
 4. https://ai.google.dev/gemma/docs/gemma_chat
 5. https://ai.google.dev/gemma/docs/lora_tuning
+6. temperature
 
 # LLM 20 Questions
 
