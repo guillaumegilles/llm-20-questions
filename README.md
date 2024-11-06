@@ -2,6 +2,7 @@
 
 ## TODOs
 
+1. Reading through https://www.ibm.com/think/topics/ai-agents to explore footnote links and overall comprehension of AI Agent and implement these stages into the project.
 1. [ ] [Starter Code for Llama 8B LLM - [LB 0.750+]](https://www.kaggle.com/code/cdeotte/starter-code-for-llama-8b-llm-lb-0-750)
 2. [ ] https://www.kaggle.com/competitions/llm-20-questions/discussion/513394
 3. [ ] https://github.com/google-gemini/gemma-cookbook/blob/main/Gemma/Guess_the_word.ipynb
