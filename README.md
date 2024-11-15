@@ -1,6 +1,15 @@
 ![images/preview.png](images/kit-robot-engaged-in-machine-learning-with-book-and-chart.gif)
 
-## TODOs
+## Requirements
+
+- [notebook 7.2.2](https://pypi.org/project/notebook/)
+- [kaggle-environments 1.16.3](https://pypi.org/project/kaggle-environments/)
+
+## TODO
+
+1. Install Kaggle API and download model’s weight with magic code bloc
+
+---
 
 1. Reading through https://www.ibm.com/think/topics/ai-agents to explore footnote links and overall comprehension of AI Agent and implement these stages into the project.
 1. [ ] [Starter Code for Llama 8B LLM - [LB 0.750+]](https://www.kaggle.com/code/cdeotte/starter-code-for-llama-8b-llm-lb-0-750)
@@ -10,9 +19,11 @@
 5. https://ai.google.dev/gemma/docs/lora_tuning
 6. temperature
 
-# LLM 20 Questions
+## Kaggle LLM 20 Questions
 
-In this simulation competition, you must create a language model capable of playing the game 20 Questions. Teams will be paired in 2 vs 2 player matchups and race to deduce the secret word first.
+In this simulation competition, you must create a language model capable
+of playing the game 20 Questions. Teams will be paired in 2 vs 2 player
+matchups and race to deduce the secret word first.
 
 ## Description
 
